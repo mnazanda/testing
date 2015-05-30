@@ -37,9 +37,10 @@
     <div class="container">
      <h2 class="logo">GYMeet</h2>
       <ul class="navbar-list">
-        <li class="navbar-item"><a class="navbar-link" href="#home">Home</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="#calendar">Calendar</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="#profile">Profile</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="logoutControl.php">Logout</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="ProfileControl.php">Profile</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="month.php">Calendar</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="createWorkoutForm.php">Create Workout</a></li>
       </ul>
     </div>
   </nav>
@@ -50,8 +51,69 @@
   <div class="container">
     <div class="row">
       <div class="twelve columns" style="margin-top: 10%">
-        <h4>Basic Page</h4>
-        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
+        <h4>Calendar</h4>
+        
+        <table class="u-full-width">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>User</th>
+              <th>Title</th>
+              <th>Spots Available</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="#workout">1:00pm</a></td>
+              <td><a href="#workout">BigBuffDood24</a></td>
+              <td><a href="#workout">Chest and Triceps</a></td>
+              <td><a href="#workout">2/2</a></td>
+            </tr>
+            <tr>
+              <td>2:30pm</td>
+              <td>SmallSkinnyDood12</td>
+              <td>Back and Biceps</td>
+              <td>1/1</td>
+            </tr>
+            <tr>
+              <td>5:00pm</td>
+              <td>ElFiggs</td>
+              <td>Shoulders</td>
+              <td>Full</td>
+            </tr>
+            <tr>
+              <td>6:00pm</td>
+              <td>BallIsLife</td>
+              <td>Legs</td>
+              <td>1/2</td>
+            </tr>
+            <tr>
+              <td>8:30pm</td>
+              <td>Slick_Rick</td>
+              <td>Back</td>
+              <td>2/3</td>
+            </tr>
+            <tr>
+              <td>8:30pm</td>
+              <td>8bottles</td>
+              <td>Shoulders/Back</td>
+              <td>Full</td>
+            </tr>
+            <tr>
+              <td>9:00pm</td>
+              <td>astonmartin</td>
+              <td>Powerlifting</td>
+              <td>1/2</td>
+            </tr>
+            <tr>
+              <td>9:30pm</td>
+              <td>NoLegDay</td>
+              <td>Squats</td>
+              <td>1/2</td>
+            </tr>
+          </tbody>
+        </table>
+        
       </div>
     </div>
   </div>

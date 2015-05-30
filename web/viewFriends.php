@@ -27,6 +27,19 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
+  <?php if (isset($_GET["addAlert"])): ?>
+     <script type="text/javascript">
+      alert("<?php echo htmlentities(urldecode($_GET["addAlert"])); ?>");
+     </script>
+     <?php endif; 
+   ?>
+<style>
+  td, h5, h6{
+    text-align:center;
+  }
+
+</style>
+
 </head>
 <body>
 
@@ -37,9 +50,10 @@
     <div class="container">
      <h2 class="logo">GYMeet</h2>
       <ul class="navbar-list">
-        <li class="navbar-item"><a class="navbar-link" href="#home">Home</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="#calendar">Calendar</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="#profile">Profile</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="logoutControl.php">Logout</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="ProfileControl.php">Profile</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="month.php">Calendar</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="createWorkoutForm.php">Create Workout</a></li>
       </ul>
     </div>
   </nav>
@@ -50,69 +64,52 @@
   <div class="container">
     <div class="row">
       <div class="twelve columns" style="margin-top: 10%">
-        <h4>Calendar</h4>
-        
-        <table class="u-full-width">
-          <thead>
-            <tr>
-              <th>Time</th>
-              <th>User</th>
-              <th>Title</th>
-              <th>Spots Available</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="#workout">1:00pm</a></td>
-              <td><a href="#workout">BigBuffDood24</a></td>
-              <td><a href="#workout">Chest and Triceps</a></td>
-              <td><a href="#workout">2/2</a></td>
-            </tr>
-            <tr>
-              <td>2:30pm</td>
-              <td>SmallSkinnyDood12</td>
-              <td>Back and Biceps</td>
-              <td>1/1</td>
-            </tr>
-            <tr>
-              <td>5:00pm</td>
-              <td>ElFiggs</td>
-              <td>Shoulders</td>
-              <td>Full</td>
-            </tr>
-            <tr>
-              <td>6:00pm</td>
-              <td>BallIsLife</td>
-              <td>Legs</td>
-              <td>1/2</td>
-            </tr>
-            <tr>
-              <td>8:30pm</td>
-              <td>Slick_Rick</td>
-              <td>Back</td>
-              <td>2/3</td>
-            </tr>
-            <tr>
-              <td>8:30pm</td>
-              <td>8bottles</td>
-              <td>Shoulders/Back</td>
-              <td>Full</td>
-            </tr>
-            <tr>
-              <td>9:00pm</td>
-              <td>astonmartin</td>
-              <td>Powerlifting</td>
-              <td>1/2</td>
-            </tr>
-            <tr>
-              <td>9:30pm</td>
-              <td>NoLegDay</td>
-              <td>Squats</td>
-              <td>1/2</td>
-            </tr>
-          </tbody>
-        </table>
-        
+        <?php session_start();  
+            echo "<h4><strong>" . $_SESSION["fullName"] . "</strong></h4>";
+
+        ?>
+
+        <form action="addFriendControl.php" method="post"/>
+          Add Friend <input type="text" name="requestedFriend"  />
+          <input type="submit" value="Add"/>
+        </form>
+
+        <?php 
+          $connect=mysqli_connect("localhost", "root", "", "gymeet")
+            or die("Could Not Connect");
+
+
+          $user = $_SESSION["userName"];
+          $query = "SELECT * FROM friends WHERE UserName = '$user'";
+          $result = mysqli_query( $connect, $query);
+
+          echo "<table>";
+          echo "<tr><th>Username</th><th>FirstName</th><th>LastName</th><th>Email</th><th></th></tr>";
+
+          while($row = mysqli_fetch_array($result)) 
+          {
+
+            $friendInfo = "SELECT * FROM users WHERE UserName = '$row[friend]'";
+
+            $fresult = mysqli_query($connect, $friendInfo);
+            $fRow = mysqli_fetch_row($fresult);
+            if ($fRow) 
+            {
+              $one = $fRow[0];
+              $two = $fRow[3];
+              $three = $fRow[4];
+              $four = $fRow[2];
+              $message = "'Are you sure you want to remove ". $one . "?'";
+              echo "<tr><td>".$one."</td>
+                    <td>".$two."</td>
+                    <td>".$three."</td>
+                    <td>".$four."</td>
+                    <td><a href=\"removeFriendControl.php?removeFriend=".$one."\" onClick=\"return confirm(".$message.")\">remove</a></td></tr>";
+            }
+          } 
+
+          echo "</table>";
+        ?>        
       </div>
     </div>
   </div>
