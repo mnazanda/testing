@@ -63,14 +63,14 @@
       <div class="twelve columns" style="margin-top: 10%">
 
         <?php session_start();
-          $connect=mysqli_connect("localhost", "root", "", "gymeet")
+          $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 dbname=d6ad8doip7s4vu user=cmcevirzzwpuze password=z7Cu5bKWj8CzZXf3OlSV-Mg90n")
             or die("Could Not Connect");
 
 
             $workoutInfo = "SELECT * FROM workouts WHERE author = '$_GET[friend]' and workoutDate = '$_GET[workoutDate]' and title = '$_GET[title]'";
             //echo $workoutInfo . "<br/>";
-            $wresult = mysqli_query($connect, $workoutInfo);
-            $wRow = mysqli_fetch_row($wresult);
+            $wresult = pg_query($connect, $workoutInfo);
+            $wRow = pg_fetch_row($wresult);
             if ($wRow) 
             {
                     /*echo $wRow[0]."<br/>";                //workouDate

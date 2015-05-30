@@ -70,7 +70,7 @@
              <li><h5><a href="#reservedWorkoutsTab">Workouts Reserved</a></h5></li>
           </ul>
           <?php 
-            $connect=mysqli_connect("localhost", "root", "", "gymeet")
+            $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 dbname=d6ad8doip7s4vu user=cmcevirzzwpuze password=z7Cu5bKWj8CzZXf3OlSV-Mg90n")
               or die("Could Not Connect");
 
             $user = $_SESSION["userName"];
@@ -81,8 +81,8 @@
 
             $currDate = str_replace("/","-",date("n-j-Y"));
 
-            $wresult = mysqli_query($connect, "SELECT * FROM workouts WHERE author = '$user' and workoutDate >= '$currDate'");
-            while($wRow = mysqli_fetch_array($wresult)) 
+            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user' and workoutDate >= '$currDate'");
+            while($wRow = pg_fetch_array($wresult)) 
             if ($wRow) 
             {
               echo "<td>".$wRow['workoutDate']."</td>
@@ -99,8 +99,8 @@
             echo "<div id='reservedWorkoutsTab' ><table id='table' class='u-full-width'>";
             echo "<tr><th></th><th>Date</th><th>Time</th><th>Title</th><th>Location</th><th>Spots Available</th><th></th></tr>";
 
-            $w2result = mysqli_query($connect, "SELECT * FROM workouts WHERE reserve1 = '$user' or reserve2 = '$user' or reserve3 = '$user' and workoutDate >= '$currDate'");
-            while($w2Row = mysqli_fetch_array($w2result)) 
+            $w2result = pg_query($connect, "SELECT * FROM workouts WHERE reserve1 = '$user' or reserve2 = '$user' or reserve3 = '$user' and workoutDate >= '$currDate'");
+            while($w2Row = pg_fetch_array($w2result)) 
             if ($w2Row) 
             {
               echo "<tr><td><strong>".$wRow['author']."</strong></td>
