@@ -11,15 +11,15 @@ $username = $_SESSION["userName"];
 
 
  pg_query($connect,"UPDATE workouts 
- 							SET workoutDate = '$_POST[date]',
-								title = '$_POST[title]',
-								location = '$_POST[location]',
-								description = '$_POST[description]',
-								startTime = '$_POST[startTime]',
-								endTime = '$_POST[endTime]' 
-							WHERE author = '$username' 
-							AND workoutDate = '$_GET[oldWorkoutDate]' 
-							AND title = '$_GET[oldTitle]'");
+	SET workoutDate = '$_POST[date]',
+	title = '$_POST[title]',
+	location = '$_POST[location]',
+	description = '$_POST[description]',
+	startTime = '$_POST[startTime]',
+	endTime = '$_POST[endTime]'
+	WHERE author = '$username' 
+	AND workoutDate = '$_GET[oldWorkoutDate]'
+	AND title = '$_GET[oldTitle]'");
 
 $connect->close();
 

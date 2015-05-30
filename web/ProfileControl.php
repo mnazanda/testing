@@ -12,9 +12,9 @@ $profileQuery = "SELECT * FROM users WHERE UserName = '$user'";
 //$friendsQuery = "SELECT * FROM friends WHERE UserName = '$user'";
 
 $profile = pg_query( $connect, $profileQuery);
-//$friends = mysqli_query( $connect, $friendsQuery);
+//$friends = pg_query( $connect, $friendsQuery);
 
-//$fRow = mysqli_fetch_array($friends);
+//$fRow = pg_fetch_array($friends);
 $pRow = pg_fetch_row($profile);
 if ($pRow) {
 	

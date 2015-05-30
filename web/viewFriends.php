@@ -86,7 +86,7 @@
           echo "<table>";
           echo "<tr><th>Username</th><th>FirstName</th><th>LastName</th><th>Email</th><th></th></tr>";
 
-          while($row = mysqli_fetch_array($result)) 
+          while($row = pg_fetch_array($result)) 
           {
 
             $friendInfo = "SELECT * FROM users WHERE UserName = '$row[friend]'";
