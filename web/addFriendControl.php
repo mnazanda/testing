@@ -27,5 +27,5 @@ else
 	header('Location: viewFriends.php?addAlert='. urlencode("No User exists!"));
 }
 
-$connect->close();
+pg_close($connect);
 ?> 

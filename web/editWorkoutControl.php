@@ -21,6 +21,6 @@ $username = $_SESSION["userName"];
 							AND workoutDate = '$_GET[oldWorkoutDate]' 
 							AND title = '$_GET[oldTitle]'");
 
-$connect->close();
+pg_close($connect);
 
 ?>

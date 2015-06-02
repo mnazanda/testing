@@ -24,5 +24,5 @@ else
 	header('Location: index.php?alert='. urlencode("Invalid Login!"));
 }
 
-$connect->close();
+pg_close($connect);
 ?> 

@@ -4,5 +4,5 @@ session_start();
 session_unset();
 header('Location: index.php');
 
-$connect->close();
+pg_close($connect);
 ?> 

@@ -11,5 +11,5 @@ pg_query( $connect, $workoutInfo);
 
 header('Location: Profile.php&alert='. urlencode("You have removed the workout!"));
 
-$connect->close();
+pg_close($connect);
 ?>

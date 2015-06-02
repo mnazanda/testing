@@ -11,6 +11,6 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 pg_query($connect,"DELETE FROM friends WHERE userName = '$user' AND friend = '$removingFriend'")or die("Could Connect");;
 pg_query($connect,"DELETE FROM friends WHERE userName = '$removingFriend' AND friend = '$user'")or die("Could Not t");;
 
-$connect->close();
+pg_close($connect);
 
 ?>

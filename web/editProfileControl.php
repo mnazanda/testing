@@ -19,6 +19,6 @@ $username = $_SESSION["userName"];
 
 $_SESSION["userName"] = $_POST['userName'];
 
-$connect->close();
+pg_close($connect);
 
 ?>

@@ -21,5 +21,5 @@ if ($pRow) {
 	$_SESSION["fullName"] = $pRow[3] . " " . $pRow[4];
 	$_SESSION["email"] = $pRow[2];
 }
-$connect->close();
+pg_close($connect);
 ?> 

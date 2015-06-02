@@ -11,6 +11,6 @@ $username = $_SESSION["userName"];
  pg_query($connect,"INSERT INTO workouts (workoutDate,  title, location, numOfReserves ,spotsLeft, author, description, startTime, endTime)
         VALUES ('$_POST[date]', '$_POST[title]', '$_POST[location]', '$_POST[numOfReserves]', '$_POST[numOfReserves]', '$username', '$_POST[description]', '$_POST[startTime]', '$_POST[endTime]')");
  
-$connect->close();
+pg_close($connect);
 
 ?>

@@ -25,5 +25,5 @@ pg_query( $connect, "UPDATE workouts SET $friendSpot = '', spotsLeft = '$newSpot
 
 header('Location: viewWorkout.php?friend='.$row[5].'&title='.$row[1].'&workoutDate='.$row[0].'&alert='. urlencode("You have unreserved a spot for this workout!"));
 
-$connect->close();
+pg_close($connect);
 ?>

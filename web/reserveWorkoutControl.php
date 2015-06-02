@@ -29,5 +29,5 @@ else
 	header('Location: viewWorkout.php?friend='.$row[5].'&title='.$row[1].'&workoutDate='.$row[0].'&alert='. urlencode("Sorry, you're already reserved for this workout!"));
 }
 
-$connect->close();
+pg_close($connect);
 ?>
