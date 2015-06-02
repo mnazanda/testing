@@ -75,24 +75,24 @@
         </form>
 
         <?php 
-          $connect=mysqli_connect("localhost", "root", "", "gymeet")
+$connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 dbname=d6ad8doip7s4vu user=cmcevirzzwpuze password=z7Cu5bKWj8CzZXf3OlSV-Mg90n")
             or die("Could Not Connect");
 
 
           $user = $_SESSION["userName"];
           $query = "SELECT * FROM friends WHERE UserName = '$user'";
-          $result = mysqli_query( $connect, $query);
+          $result = pg_query( $connect, $query);
 
           echo "<table>";
           echo "<tr><th>Username</th><th>FirstName</th><th>LastName</th><th>Email</th><th></th></tr>";
 
-          while($row = mysqli_fetch_array($result)) 
+          while($row = pg_fetch_array($result)) 
           {
 
             $friendInfo = "SELECT * FROM users WHERE UserName = '$row[friend]'";
 
-            $fresult = mysqli_query($connect, $friendInfo);
-            $fRow = mysqli_fetch_row($fresult);
+            $fresult = pg_query($connect, $friendInfo);
+            $fRow = pg_fetch_row($fresult);
             if ($fRow) 
             {
               $one = $fRow[0];
