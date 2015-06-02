@@ -22,7 +22,7 @@ body .fc { /* extra precedence to overcome jqui */
 /* Colors
 --------------------------------------------------------------------------------------------------*/
 
-.fc-day-hover{
+.fc-day:hover{
 	background:#4DB8D8;
 }
 
