@@ -94,7 +94,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 
             $currDate = str_replace("/","-",date("n-j-Y"));
 
-            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user' and workoutDate >= '$currDate'");
+            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user' and \"workoutDate\" >= '$currDate'");
             while($wRow = pg_fetch_array($wresult)) 
             if ($wRow) 
             {
@@ -112,7 +112,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
             echo "<div id='reservedWorkoutsTab' ><table id='table' class='u-full-width'>";
             echo "<tr><th></th><th>Date</th><th>Time</th><th>Title</th><th>Location</th><th>Spots Available</th><th></th></tr>";
 
-            $w2result = pg_query($connect, "SELECT * FROM workouts WHERE reserve1 = '$user' or reserve2 = '$user' or reserve3 = '$user' and workoutDate >= '$currDate'");
+            $w2result = pg_query($connect, "SELECT * FROM workouts WHERE reserve1 = '$user' or reserve2 = '$user' or reserve3 = '$user' and \"workoutDate\" >= '$currDate'");
             while($w2Row = pg_fetch_array($w2result)) 
             if ($w2Row) 
             {
