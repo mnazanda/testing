@@ -60,7 +60,7 @@
       <div class="twelve columns" style="margin-top: 10%">
 
         <?php session_start();
-          $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 dbname=d6ad8doip7s4vu user=cmcevirzzwpuze password=z7Cu5bKWj8CzZXf3OlSV-Mg90n")
+          $connect=mysqli_connect("localhost", "root", "", "gymeet")
             or die("Could Not Connect");
 
             $prev_date = date('Y-m-d', strtotime($_GET["date"] .' -1 day'));
@@ -74,18 +74,18 @@
 
           $user = $_SESSION["userName"];
           $query = "SELECT * FROM friends WHERE UserName = '$user'";
-          $result = pg_query( $connect, $query);
+          $result = mysqli_query( $connect, $query);
 
           echo "<table id='table' width='100%'>";
           echo "<tr><th><h5><strong></strong></h5></th><th><h5><strong>Start</strong></h5></th><th><h5><strong>End</strong></h5></th><th><h5><strong>Title</strong></h5></th><th><h5><strong>Location</strong></h5></th><th><h5><strong>Spots Available</strong></h5></th><th><h5><strong></strong></h5></th></tr>";
 
-          while($row = pg_fetch_array($result)) 
+          while($row = mysqli_fetch_array($result)) 
           {
             $wDate = date("n-j-Y", strtotime($_GET["date"]));
             $workoutInfo = "SELECT * FROM workouts WHERE author = '$row[friend]' and workoutDate = '$wDate' ORDER BY startTime DESC ";
             //echo $workoutInfo . "<br/>";
-            $wresult = pg_query($connect, $workoutInfo);
-            while($wRow = pg_fetch_array($wresult)) 
+            $wresult = mysqli_query($connect, $workoutInfo);
+            while($wRow = mysqli_fetch_array($wresult)) 
             if ($wRow) 
             {
               echo "<tr><td><strong>".$wRow['author']."</strong></td>

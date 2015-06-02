@@ -404,6 +404,8 @@ hr.fc-divider {
 
 	/* no bottom borders on rows */
 	border-bottom: 0 hidden transparent; 
+
+	margin-bottom: 0;
 }
 
 .fc-row:first-child table {
@@ -1058,4 +1060,8 @@ be a descendant of the grid when it is being dragged.
 
 .fc-time-grid-event .fc-resizer:after {
 	content: "=";
+}
+
+tr th {
+	position: relative;
 }

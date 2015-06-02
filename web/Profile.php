@@ -21,11 +21,24 @@
      </script>
      <?php endif; 
    ?>
+
+   <?php if (isset($_GET["addAlert"])): ?>
+     <script type="text/javascript">
+      alert("<?php echo htmlentities(urldecode($_GET["addAlert"])); ?>");
+     </script>
+     <?php endif; 
+   ?>
   
 <style>
-  td, th{
+  td, th, h5, h6{
     text-align:center;
   }
+  table{
+    vertical-align:center;
+  }
+
+</style>
+
 
   button{
     vertical-align: right;
@@ -57,20 +70,20 @@
       <div class="twelve columns" style="margin-top: 10%">
         <?php session_start();  
             echo "<h3><strong>" . $_SESSION["fullName"] . "</strong></h3>";
-        ?>
 
-        <button onClick="location.href='editProfileControl.php'">Edit Profile</button>
-        <button onClick="location.href='viewFriends.php'">View Friends</button>
-        <br/>
+        ?>
         
         <!--<h5>My Workouts:</h5>-->
         <div id="tabs">
           <ul class="nav nav-tabs" role="tablist">
              <li><h5><a href="#myWorkoutsTab">Workouts Created</a></h5></li>
              <li><h5><a href="#reservedWorkoutsTab">Workouts Reserved</a></h5></li>
+             <li><h5><a href="#viewFriendsTab">Friends</a></h5></li>
+             <li><h5><a href="#editProfileTab">Edit Profile</a></h5></li>
           </ul>
+          <!--**************************************WORKOUTS CREATED********************************-->
           <?php 
-            $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 dbname=d6ad8doip7s4vu user=cmcevirzzwpuze password=z7Cu5bKWj8CzZXf3OlSV-Mg90n")
+            $connect=mysqli_connect("localhost", "root", "", "gymeet")
               or die("Could Not Connect");
 
             $user = $_SESSION["userName"];
@@ -81,8 +94,8 @@
 
             $currDate = str_replace("/","-",date("n-j-Y"));
 
-            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user' and workoutDate >= '$currDate'");
-            while($wRow = pg_fetch_array($wresult)) 
+            $wresult = mysqli_query($connect, "SELECT * FROM workouts WHERE author = '$user' and workoutDate >= '$currDate'");
+            while($wRow = mysqli_fetch_array($wresult)) 
             if ($wRow) 
             {
               echo "<td>".$wRow['workoutDate']."</td>
@@ -92,15 +105,15 @@
                     <td>".$wRow['spotsLeft']."/".$wRow['numOfReserves']."</td>
                     <td><a href='editWorkout.php?title=".$wRow['title']."&workoutDate=".$wRow['workoutDate']."&location=".$wRow['location']."&startTime=".$wRow['startTime']."&endTime=".$wRow['endTime']."&numOfReserves=".$wRow['numOfReserves']."&description=".$wRow['description']."'>Edit</a></td></tr>";
             }
-
+          /*******************************************WORKOUTS RESERVED***********************************/
             echo "</table></div>";
 
             //echo "<h5>Reserved Workouts:</h5>";
             echo "<div id='reservedWorkoutsTab' ><table id='table' class='u-full-width'>";
             echo "<tr><th></th><th>Date</th><th>Time</th><th>Title</th><th>Location</th><th>Spots Available</th><th></th></tr>";
 
-            $w2result = pg_query($connect, "SELECT * FROM workouts WHERE reserve1 = '$user' or reserve2 = '$user' or reserve3 = '$user' and workoutDate >= '$currDate'");
-            while($w2Row = pg_fetch_array($w2result)) 
+            $w2result = mysqli_query($connect, "SELECT * FROM workouts WHERE reserve1 = '$user' or reserve2 = '$user' or reserve3 = '$user' and workoutDate >= '$currDate'");
+            while($w2Row = mysqli_fetch_array($w2result)) 
             if ($w2Row) 
             {
               echo "<tr><td><strong>".$wRow['author']."</strong></td>
@@ -113,6 +126,102 @@
             }
             echo "</table></div>";
           ?>
+          <!--**************************************VIEW FRIENDS********************************-->
+          <div id="viewFriendsTab">
+            <br/>
+              <form style="text-align:center" action="addFriendControl.php" method="post"/>
+                Add Friend <input type="text" name="requestedFriend"  />
+                <input type="submit" value="Add"/>
+              </form>
+
+              <?php 
+                $connect=mysqli_connect("localhost", "root", "", "gymeet")
+                  or die("Could Not Connect");
+
+
+                $user = $_SESSION["userName"];
+                $query = "SELECT * FROM friends WHERE UserName = '$user'";
+                $result = mysqli_query( $connect, $query);
+
+                echo "<table style='margin-left:auto;margin-right:auto'>";
+                echo "<tr><th>Username</th><th>FirstName</th><th>LastName</th><th>Email</th><th></th></tr>";
+
+                while($row = mysqli_fetch_array($result)) 
+                {
+
+                  $friendInfo = "SELECT * FROM users WHERE UserName = '$row[friend]'";
+
+                  $fresult = mysqli_query($connect, $friendInfo);
+                  $fRow = mysqli_fetch_row($fresult);
+                  if ($fRow) 
+                  {
+                    $one = $fRow[0];
+                    $two = $fRow[3];
+                    $three = $fRow[4];
+                    $four = $fRow[2];
+                    $message = "'Are you sure you want to remove ". $one . "?'";
+                    echo "<tr><td>".$one."</td>
+                          <td>".$two."</td>
+                          <td>".$three."</td>
+                          <td>".$four."</td>
+                          <td><a href=\"removeFriendControl.php?removeFriend=".$one."\" onClick=\"return confirm(".$message.")\">remove</a></td></tr>";
+                  }
+                } 
+                echo "</table>";
+              ?>        
+          </div>
+          <!--**************************************EDIT PROFILE********************************-->
+
+          <div id="editProfileTab">
+            <?php 
+              $connect=mysqli_connect("localhost", "root", "", "gymeet")
+                or die("Could Not Connect");
+
+
+              $user = $_SESSION["userName"];
+              $query = "SELECT * FROM users WHERE UserName = '$user'";
+              $result = mysqli_query( $connect, $query);
+              $row = mysqli_fetch_row($result);
+
+
+              echo "
+                <form action='editProfileControl.php' method='post'/>
+                <div class='row'>
+                  <div class='six columns'>
+                    <label for='userName'>Username</label>
+                    <input class='u-full-width' type='text' name='userName' value='".$row[0]."'/>
+                  </div>
+                </div>
+                <div class='row'>
+                  <div class='six columns'>
+                    <label for='password'>Password</label>
+                    <input class='u-full-width' type='text' name='password' value='".$row[1]."'/>
+                  </div>
+                </div>
+                <div class='row'>
+                  <div class='six columns'>
+                    <label for='email'>Email Address</label>
+                    <input class='u-full-width' type='email' name='email' value='".$row[2]."'/>
+                  </div>
+                </div>
+                <div class='row'>
+                  <div class='three columns'>
+                    <label for='firstName'>First Name</label>
+                    <input class='u-full-width' type='text' name='firstName' value='".$row[3]."'/>
+                  </div>
+                  <div class='three columns'>
+                    <label for='lastName'>Last Name</label>
+                    <input class='u-full-width' type='text' name='lastName' value='".$row[4]."'/>
+                  </div>
+                </div>
+                <div class='row'>
+                </div>
+                <input type='submit' value='Save' class='button-primary'/>
+                </form>
+              ";
+
+              ?>
+          </div>
         </div>
       </div>
     </div>
@@ -142,7 +251,12 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
  <script type="text/javascript" charset="utf-8">
       $(document).ready( function () {
-        $("#tabs").tabs({ active: '#myWorkoutsTab' });
+
+        var query = window.location.search.substring(1);
+        var vars = query.split("=");
+        var tabName = vars[1];
+
+        $("#tabs").tabs({ active: "#" + tabName });
       });
   </script>
 

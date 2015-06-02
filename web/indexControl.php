@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$connect= pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 dbname=d6ad8doip7s4vu user=cmcevirzzwpuze password=z7Cu5bKWj8CzZXf3OlSV-Mg90n")
+$connect=mysqli_connect("localhost", "root", "", "gymeet")
     or die("Could Not Connect");
  
 
@@ -10,8 +10,8 @@ $pass = $_POST["password"];
 
 $query = "SELECT * FROM users WHERE UserName = '$user' AND Password = '$pass'";
 
-$result = pg_query( $connect, $query);
-$row = pg_fetch_array($result);
+$result = mysqli_query( $connect, $query);
+$row = mysqli_fetch_array($result);
 
 if($row)
 {
