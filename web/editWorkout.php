@@ -110,7 +110,7 @@
       <div class="row">
         <div class="six columns">
           <label for="description">Description</label>
-          <?php echo "<textarea class='u-full-width' rows='4' name='description' value='".$_GET['description']."'> </textarea>"?>
+          <?php echo "<textarea class='u-full-width' rows='4' name='description'>".$_GET['description']."</textarea>"?>
         </div>
       </div>
       <!--<div class="row">
