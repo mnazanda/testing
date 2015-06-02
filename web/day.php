@@ -82,7 +82,7 @@
           while($row = pg_fetch_array($result)) 
           {
             $wDate = date("n-j-Y", strtotime($_GET["date"]));
-            $workoutInfo = "SELECT * FROM workouts WHERE author = '$row[friend]' and workoutDate = '$wDate' ORDER BY startTime DESC ";
+            $workoutInfo = "SELECT * FROM workouts WHERE author = '$row[friend]' and \"workoutDate\" = '$wDate' ORDER BY startTime DESC ";
             //echo $workoutInfo . "<br/>";
             $wresult = pg_query($connect, $workoutInfo);
             while($wRow = pg_fetch_array($wresult)) 
