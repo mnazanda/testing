@@ -8,7 +8,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 $user = $_POST["userName"];
 $pass = $_POST["password"];
 
-$query = "SELECT * FROM users WHERE UserName = '$user' AND Password = '$pass'";
+$query = "SELECT * FROM users WHERE \"userName\" = '$user' AND Password = '$pass'";
 
 $result = pg_query( $connect, $query);
 $row = pg_fetch_array($result);

@@ -8,8 +8,8 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 
 $user = $_SESSION["userName"];
 
-$profileQuery = "SELECT * FROM users WHERE UserName = '$user'";
-//$friendsQuery = "SELECT * FROM friends WHERE UserName = '$user'";
+$profileQuery = "SELECT * FROM users WHERE \"userName\" = '$user'";
+//$friendsQuery = "SELECT * FROM friends WHERE \"userName\" = '$user'";
 
 $profile = pg_query( $connect, $profileQuery);
 //$friends = pg_query( $connect, $friendsQuery);

@@ -9,16 +9,16 @@ $reqFriend = $_POST["requestedFriend"];
 $_SESSION["requestedFriend"] = $_POST["requestedFriend"];
 
 
-$query = "SELECT * FROM users WHERE UserName = '$reqFriend'";
+$query = "SELECT * FROM users WHERE \"userName\" = '$reqFriend'";
 
 $result = pg_query( $connect, $query);
 $row = pg_fetch_array($result);
 
 if($row)
 {
-	pg_query( $connect, "INSERT INTO friends (userName, friend)
+	pg_query( $connect, "INSERT INTO friends (\"userName\", friend)
         VALUES ('$user', '$reqFriend')");
-	pg_query( $connect, "INSERT INTO friends (userName, friend)
+	pg_query( $connect, "INSERT INTO friends (\"userName\", friend)
         VALUES ('$reqFriend','$user')");
 	header('Location: viewFriends.php?addAlert='. urlencode("Friend added!"));
 }

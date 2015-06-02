@@ -73,7 +73,7 @@
             echo "</tr></table>";
 
           $user = $_SESSION["userName"];
-          $query = "SELECT * FROM friends WHERE UserName = '$user'";
+          $query = "SELECT * FROM friends WHERE \"userName\" = '$user'";
           $result = pg_query( $connect, $query);
 
           echo "<table id='table' width='100%'>";

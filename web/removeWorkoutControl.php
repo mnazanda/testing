@@ -6,7 +6,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
  
 $user = $_SESSION["userName"];
 
-$workoutInfo = "DELETE FROM workouts WHERE author = '$user' and workoutDate = '$_GET[workoutDate]' and title = '$_GET[title]'";
+$workoutInfo = "DELETE FROM workouts WHERE author = '$user' and \"workoutDate\" = '$_GET[workoutDate]' and title = '$_GET[title]'";
 pg_query( $connect, $workoutInfo);
 
 header('Location: Profile.php&alert='. urlencode("You have removed the workout!"));

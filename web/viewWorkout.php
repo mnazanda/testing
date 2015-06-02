@@ -67,7 +67,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
             or die("Could Not Connect");
 
 
-            $workoutInfo = "SELECT * FROM workouts WHERE author = '$_GET[friend]' and workoutDate = '$_GET[workoutDate]' and title = '$_GET[title]'";
+            $workoutInfo = "SELECT * FROM workouts WHERE author = '$_GET[friend]' and \"workoutDate\" = '$_GET[workoutDate]' and title = '$_GET[title]'";
             //echo $workoutInfo . "<br/>";
             $wresult = pg_query($connect, $workoutInfo);
             $wRow = pg_fetch_row($wresult);

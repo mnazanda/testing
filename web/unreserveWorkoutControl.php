@@ -6,7 +6,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
  
 $user = $_SESSION["userName"];
 
-$workoutInfo = "SELECT * FROM workouts WHERE author = '$_GET[friend]' and workoutDate = '$_GET[workoutDate]' and title = '$_GET[title]'";
+$workoutInfo = "SELECT * FROM workouts WHERE author = '$_GET[friend]' and \"workoutDate\" = '$_GET[workoutDate]' and title = '$_GET[title]'";
 
 $result = pg_query( $connect, $workoutInfo);
 $row = pg_fetch_row($result);
@@ -21,7 +21,7 @@ else if($row[11] == $user)
 $friendSpot = "reserve".$spot;
 $newSpotsLeft = $row[4]+1;
 
-pg_query( $connect, "UPDATE workouts SET $friendSpot = '', spotsLeft = '$newSpotsLeft' WHERE author = '$_GET[friend]' and workoutDate = '$_GET[workoutDate]' and title = '$_GET[title]'");
+pg_query( $connect, "UPDATE workouts SET $friendSpot = '', \"spotsLeft\" = '$newSpotsLeft' WHERE author = '$_GET[friend]' and \"workoutDate\" = '$_GET[workoutDate]' and title = '$_GET[title]'");
 
 header('Location: viewWorkout.php?friend='.$row[5].'&title='.$row[1].'&workoutDate='.$row[0].'&alert='. urlencode("You have unreserved a spot for this workout!"));
 

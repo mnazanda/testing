@@ -140,7 +140,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 
 
                 $user = $_SESSION["userName"];
-                $query = "SELECT * FROM friends WHERE UserName = '$user'";
+                $query = "SELECT * FROM friends WHERE \"userName\" = '$user'";
                 $result = pg_query( $connect, $query);
 
                 echo "<table style='margin-left:auto;margin-right:auto'>";
@@ -149,7 +149,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
                 while($row = pg_fetch_array($result)) 
                 {
 
-                  $friendInfo = "SELECT * FROM users WHERE UserName = '$row[friend]'";
+                  $friendInfo = "SELECT * FROM users WHERE \"userName\" = '$row[friend]'";
 
                   $fresult = pg_query($connect, $friendInfo);
                   $fRow = pg_fetch_row($fresult);
@@ -179,7 +179,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 
 
               $user = $_SESSION["userName"];
-              $query = "SELECT * FROM users WHERE UserName = '$user'";
+              $query = "SELECT * FROM users WHERE \"userName\" = '$user'";
               $result = pg_query( $connect, $query);
               $row = pg_fetch_row($result);
 
