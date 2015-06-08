@@ -20,11 +20,11 @@ if($row)
         VALUES ('$user', '$reqFriend')");
 	pg_query( $connect, "INSERT INTO friends (\"userName\", friend)
         VALUES ('$reqFriend','$user')");
-	header('Location: viewFriends.php?addAlert='. urlencode("Friend added!"));
+	header('Location: Profile.php?addAlert='. urlencode("Friend added!"));
 }
 else
 {
-	header('Location: viewFriends.php?addAlert='. urlencode("No User exists!"));
+	header('Location: Profile.php?addAlert='. urlencode("No User exists!"));
 }
 
 pg_close($connect);
