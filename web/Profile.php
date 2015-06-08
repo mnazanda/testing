@@ -170,46 +170,6 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
                 echo "</table>";
               ?>        
           </div>
-          <!--**************************************EDIT PROFILE********************************-->
-
-          <div id="editProfileTab">
-            <?php 
-$connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 dbname=d6ad8doip7s4vu user=cmcevirzzwpuze password=z7Cu5bKWj8CzZXf3OlSV-Mg90n")
-                or die("Could Not Connect");
-
-
-              $user = $_SESSION["userName"];
-              $query = "SELECT * FROM users WHERE \"userName\" = '$user'";
-              $result = pg_query( $connect, $query);
-              $row = pg_fetch_row($result);
-
-
-              echo "
-                <form action='editProfileControl.php' method='post'/>
-                <div class='row'>
-                  <div class='six columns'>
-                    <label for='email'>Email Address</label>
-                    <input class='u-full-width' type='email' name='email' value='".$row[2]."'/>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='three columns'>
-                    <label for='firstName'>First Name</label>
-                    <input class='u-full-width' type='text' name='firstName' value='".$row[3]."'/>
-                  </div>
-                  <div class='three columns'>
-                    <label for='lastName'>Last Name</label>
-                    <input class='u-full-width' type='text' name='lastName' value='".$row[4]."'/>
-                  </div>
-                </div>
-                <div class='row'>
-                </div>
-                <input type='submit' value='Save' class='button-primary'/>
-                </form>
-              ";
-
-              ?>
-          </div>
         </div>
       </div>
     </div>
