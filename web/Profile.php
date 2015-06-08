@@ -15,13 +15,6 @@
 
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-<?php if (isset($_GET["addAlert"])): ?>
-     <script type="text/javascript">
-      alert("<?php echo htmlentities(urldecode($_GET["addAlert"])); ?>");
-     </script>
-     <?php endif; 
-   ?>
-
    <?php if (isset($_GET["addAlert"])): ?>
      <script type="text/javascript">
       alert("<?php echo htmlentities(urldecode($_GET["addAlert"])); ?>");
