@@ -10,12 +10,12 @@ $username = $_SESSION["userName"];
 
 
  pg_query($connect,"UPDATE users 
-                            SET \"username\" = '$_POST[userName]',
-                                \"Password\" = '$_POST[password]',
+                            SET \"userName\" = '$_POST[userName]',
+                                \"password\" = '$_POST[password]',
                                 email = '$_POST[email]',
-                                \"FirstName\" = '$_POST[firstName]',
-                                \"LastName\" = '$_POST[lastName]'
-                            WHERE \"username\" = '$username' ");
+                                \"firstName\" = '$_POST[firstName]',
+                                \"lastName\" = '$_POST[lastName]'
+                            WHERE \"userName\" = '$username' ");
 
 $_SESSION["userName"] = $_POST['userName'];
 

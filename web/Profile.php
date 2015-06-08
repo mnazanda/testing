@@ -188,18 +188,6 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
                 <form action='editProfileControl.php' method='post'/>
                 <div class='row'>
                   <div class='six columns'>
-                    <label for='userName'>Username</label>
-                    <input class='u-full-width' type='text' name='userName' value='".$row[0]."'/>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='six columns'>
-                    <label for='password'>Password</label>
-                    <input class='u-full-width' type='text' name='password' value='".$row[1]."'/>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='six columns'>
                     <label for='email'>Email Address</label>
                     <input class='u-full-width' type='email' name='email' value='".$row[2]."'/>
                   </div>
