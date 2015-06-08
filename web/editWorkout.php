@@ -90,15 +90,15 @@
       <div class="row" id="timePicker">
          <div class="two columns">
           <label for="date">Day</label>
-          <?php echo"<input class='u-full-width' type='text' name='date' value='".$_GET['workoutDate']."'/>" ?>
+          <?php echo"<input class='u-full-width date start' type='text' name='date' value='".$_GET['workoutDate']."'/>" ?>
         </div>
          <div class="two columns">
           <label for="startTime">Start Time</label>
-          <?php echo"<input class='u-full-width' type='text' name='startTime' value='".$_GET['startTime']."'/>" ?>
+          <?php echo"<input class='u-full-width time start' type='text' name='startTime' value='".$_GET['startTime']."'/>" ?>
         </div>
         <div class="two columns">
           <label for="endTime">End Time</label>
-          <?php echo"<input class='u-full-width' type='text' name='endTime' value='".$_GET['endTime']."'/>" ?>
+          <?php echo"<input class='u-full-width time end' type='text' name='endTime' value='".$_GET['endTime']."'/>" ?>
         </div>
       </div>
       <div class="row">
