@@ -79,7 +79,6 @@
              <li><h5><a href="#myWorkoutsTab">Workouts Created</a></h5></li>
              <li><h5><a href="#reservedWorkoutsTab">Workouts Reserved</a></h5></li>
              <li><h5><a href="#viewFriendsTab">Friends</a></h5></li>
-             <li><h5><a href="#editProfileTab">Edit Profile</a></h5></li>
           </ul>
           <!--**************************************WORKOUTS CREATED********************************-->
           <?php 
@@ -94,7 +93,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 
             $currDate = str_replace("/","-",date("n-j-Y"));
 
-            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user'");
+            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user' and \"workoutDate\" >= '$currDate'");
             while($wRow = pg_fetch_array($wresult)) 
             if ($wRow) 
             {
