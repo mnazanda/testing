@@ -93,7 +93,7 @@ $connect=pg_connect("host=ec2-107-21-114-132.compute-1.amazonaws.com port=5432 d
 
             $currDate = str_replace("/","-",date("n-j-Y"));
 
-            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user' and \"workoutDate\" >= '$currDate'");
+            $wresult = pg_query($connect, "SELECT * FROM workouts WHERE author = '$user'");
             while($wRow = pg_fetch_array($wresult)) 
             if ($wRow) 
             {
